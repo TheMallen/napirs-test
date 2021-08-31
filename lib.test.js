@@ -9,6 +9,8 @@ test("is faster than equivalent JS", () => {
   const jsReturn = withTiming(() => slowFibonacci(10));
   const rsReturn = withTiming(() => fibonacci(10));
 
+  console.log("JS Time:", jsReturn.elapsedMs);
+  console.log("RS Time:", rsReturn.elapsedMs);
   expect(rsReturn.elapsedMs).toBeLessThan(jsReturn.elapsedMs);
 });
 
@@ -16,7 +18,7 @@ function slowFibonacci(n) {
   if (n == 1 || n == 2) {
     return 1;
   }
-  return fibonacci(n - 1) + fibonacci(n - 2);
+  return slowFibonacci(n - 1) + slowFibonacci(n - 2);
 }
 
 function withTiming(operation) {
