@@ -1,0 +1,16 @@
+{
+  "package": "swcify",
+  "devDependencies": {
+    "@napi-rs/cli": "^1.0.0",
+    "jest": "^27.1.0"
+  },
+  "napi": {
+    "name": "swcify"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "napi build --release",
+    "build:test": "napi build",
+    "build:debug": "napi build"
+  }
+}
