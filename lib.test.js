@@ -1,4 +1,4 @@
-const { fibonacci } = require("./swcify.node");
+const { fibonacci } = require("./");
 
 test("executes fibonacci", () => {
   expect(fibonacci(1)).toBe(1);
