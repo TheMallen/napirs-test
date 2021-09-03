@@ -51,7 +51,7 @@ jobs:
         run: yarn install --frozen-lockfile --registry https://registry.npmjs.org --network-timeout 300000
 
       - name: 'Build'
-        run: yarn build-native
+        run: yarn build
         env:
           MACOSX_DEPLOYMENT_TARGET: '10.13'
 
@@ -89,7 +89,7 @@ jobs:
         run: yarn install --frozen-lockfile --registry https://registry.npmjs.org --network-timeout 300000
 
       - name: Cross build aarch64
-        run: yarn build-native --target aarch64-apple-darwin
+        run: yarn build --target aarch64-apple-darwin
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
