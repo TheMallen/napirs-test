@@ -107,17 +107,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        if: ${{ env.GITHUB_EVENT_NAME  == 'workflow_dispatch' }}
+        # if: ${{ env.GITHUB_EVENT_NAME  == 'workflow_dispatch' }}
       - uses: actions/download-artifact@v2
         with:
           name: swcify-binaries
           path: native
-        if: ${{ env.GITHUB_EVENT_NAME  == 'workflow_dispatch' }}
+        # if: ${{ env.GITHUB_EVENT_NAME  == 'workflow_dispatch' }}
       - uses: EndBug/add-and-commit@v7
         with:
           add: 'native --force'
-          message: 'Build swcify binaries'
-        if: ${{ env.GITHUB_EVENT_NAME  == 'workflow_dispatch' }}
+          message: 'AUTOMATED - Build swcify binaries'
+        # if: ${{ env.GITHUB_EVENT_NAME  == 'workflow_dispatch' }}
 
   check:
     needs: [build, build-apple-silicon]
