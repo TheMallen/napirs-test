@@ -1,14 +1,18 @@
-## napi-rs experiments
+## SWCify
 
-This repo might eventually become the basis for some SWC wrapping fun, but for now it is just for experimenting with napi-rs.
+This repo wraps SWC with a napi-rs package implementing our own custom transforms.
 
-Right now it just does a silly fibonacci thing.
+### toolchain
 
-### Using in node
+You'll need the rust nightly version listed in `rust-toolchain` in order to build this project.
 
-- `yarn build`
-- `node`
-- `require('./swcify.node').fibonacci()`
+### Using locally from a node project
+
+- clone the repo
+- build the package `yarn build`
+- `npx yalc publish`
+- in your other repo `npx yalc install`
+- `require('swcify')`;
 
 ### Running tests
 

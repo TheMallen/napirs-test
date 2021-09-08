@@ -1,32 +1,31 @@
-const { fibonacci } = require("./");
+/* eslint-env jest */
+const { transformSync } = require("./");
 
-test("executes fibonacci", () => {
-  expect(fibonacci(1)).toBe(1);
-  expect(fibonacci(3)).toBe(2);
+const swc = async (code) => {
+  let output = await transformSync(code);
+  return output.code;
+};
+
+const trim = (s) => s.join("\n").trim().replace(/^\s+/gm, "");
+
+describe("swcify", () => {
+  it("returns JS", () => {
+    const output = swc(
+      trim`
+      import {foo} from 'bar';
+
+      export function helloWorld() {
+        console.log("hi ", foo);
+      }
+    `
+    );
+
+    expect(output).toMatch(trim`
+    import {foo} from 'bar';
+
+    export function helloWorld() {
+      console.log("hi ", foo);
+    }
+  `);
+  });
 });
-
-test("is faster than equivalent JS", () => {
-  const jsReturn = withTiming(() => slowFibonacci(10));
-  const rsReturn = withTiming(() => fibonacci(10));
-
-  console.log("JS Time:", jsReturn.elapsedMs);
-  console.log("RS Time:", rsReturn.elapsedMs);
-  expect(rsReturn.elapsedMs).toBeLessThan(jsReturn.elapsedMs);
-});
-
-function slowFibonacci(n) {
-  if (n == 1 || n == 2) {
-    return 1;
-  }
-  return slowFibonacci(n - 1) + slowFibonacci(n - 2);
-}
-
-function withTiming(operation) {
-  const start = process.hrtime();
-  const result = operation();
-  const after = process.hrtime(start);
-  return {
-    result,
-    elapsedMs: (after[0] * 1000000000 + after[1]) / 1000000,
-  };
-}
