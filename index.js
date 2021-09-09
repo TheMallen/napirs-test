@@ -9,8 +9,6 @@ const nativeBindings = loadBinding(
   "swcify"
 );
 
-console.log("nativeBindings", nativeBindings);
-
 async function transform(src, options = {}) {
   const isModule = typeof src !== "string";
 
